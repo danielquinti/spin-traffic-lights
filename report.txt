@@ -1,0 +1,8 @@
+Checks:
+	Deadlock: 
+		spin -search traffic.pml
+		0 errors and no maxdepth warning
+	Safety: 
+		spin -a -f '<>(light!=red & light2!=red)' traffic.pml ; gcc -o pan -DSAFETY pan.c ; ./pan
+	Liveness:  
+		spin -a -f '![](<>(light==red)) || ![](<>(light2==red)) || ![](<>(light==yellow)) || ![](<>(light2==yellow)) || ![](<>(light==green)) || ![](<>(light2==green))' traffic.pml  ; gcc -o pan -DSAFETY pan.c ; ./pan
